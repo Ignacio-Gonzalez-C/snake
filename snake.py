@@ -51,14 +51,23 @@ change_to = direction
 
 score = 0
 
+game_over_= False
+
 # Game Over
 def game_over():
+    global game_over_
+    game_over_ = True
     my_font = pygame.font.SysFont('times new roman', 90)
+    my_font_2 = pygame.font.SysFont('times new roman', 40)
     game_over_surface = my_font.render('GAME OVER', True, red)
+    game_over_surface_2 = my_font_2.render('c: continuar / q: quitar', True, white)
     game_over_rect = game_over_surface.get_rect()
+    game_over_rect_2 = game_over_surface_2.get_rect()
     game_over_rect.midtop = (frame_size_x/2, frame_size_y/4)
+    game_over_rect_2.midtop = (frame_size_x/2, frame_size_y/2)
     game_window.fill(black)
-    game_window.blit(game_over_surface, game_over_rect)
+    game_window.blit(game_over_surface ,game_over_rect)
+    game_window.blit(game_over_surface_2, game_over_rect_2)
     show_score(0, red, 'consolas', 20)
     pygame.display.flip()
     time.sleep(3)
