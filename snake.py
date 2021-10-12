@@ -12,8 +12,8 @@ difficulty = input("Ingresa nivel de dificultad (1:Fácil, 2:Medio, 3:Difícil):
 assert difficulty.isdigit(), "El valor ingresado debe ser un número entre 1 y 3"
 difficulty = int(difficulty)
 assert difficulty in [1,2,3,4], "El valor ingresado debe ser un número entre 1 y 3"
-#difficulty = (difficulty**2)*10
-difficulty = 200
+difficulty = (difficulty**2)*10
+
 
 # Checks for errors encountered
 check_errors = pygame.init()
@@ -66,7 +66,20 @@ def game_over():
     pygame.quit()
     sys.exit()
     
-    
+def ganar():
+    my_font = pygame.font.SysFont('times new roman', 90)
+    ganar_surface = my_font.render('HAS GANADO!!', True, blue)
+    ganar_rect = ganar_surface.get_rect()
+    ganar_rect.midtop = (frame_size_x/2, frame_size_y/4)
+    game_window.fill(black)
+    game_window.blit(ganar_surface, ganar_rect)
+    show_score(0, green, 'consolas', 20)
+    pygame.display.flip()
+    time.sleep(3)
+    pygame.quit()
+    sys.exit()
+
+
 # Score
 def show_score(choice, color, font, size):
     score_font = pygame.font.SysFont(font, size)
@@ -82,6 +95,8 @@ def show_score(choice, color, font, size):
 
 # Main logic
 while True:
+    if (score == 10):
+        ganar()
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             pygame.quit()
