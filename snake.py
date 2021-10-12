@@ -66,7 +66,20 @@ def game_over():
                 if event.type == pygame.KEYDOWN and event.key == ord('c'):
                     game()
     
-    
+def ganar():
+    my_font = pygame.font.SysFont('times new roman', 90)
+    ganar_surface = my_font.render('HAS GANADO!!', True, blue)
+    ganar_rect = ganar_surface.get_rect()
+    ganar_rect.midtop = (frame_size_x/2, frame_size_y/4)
+    game_window.fill(black)
+    game_window.blit(ganar_surface, ganar_rect)
+    show_score(0, green, 'consolas', 20)
+    pygame.display.flip()
+    time.sleep(3)
+    pygame.quit()
+    sys.exit()
+
+
 # Score
 def show_score(choice, color, font, size):
     score_font = pygame.font.SysFont(font, size)
@@ -98,6 +111,8 @@ def game():
 
     score = 0
     while True:
+        if (score==10):
+            ganar()
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
