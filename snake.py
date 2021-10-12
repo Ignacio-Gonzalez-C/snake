@@ -39,28 +39,15 @@ blue = pygame.Color(0, 0, 255)
 fps_controller = pygame.time.Clock()
 
 
-# Game variables
-snake_pos = [100, 50]
-snake_body = [[100, 50], [100-10, 50], [100-(2*10), 50]]
-
-food_pos = [random.randrange(1, (frame_size_x//10)) * 10, random.randrange(1, (frame_size_y//10)) * 10]
-food_spawn = True
-
-direction = 'RIGHT'
-change_to = direction
-
-score = 0
-
-game_over_= False
 
 # Game Over
 def game_over():
     global game_over_
     game_over_ = True
     my_font = pygame.font.SysFont('times new roman', 90)
-    my_font_2 = pygame.font.SysFont('times new roman', 40)
+    my_font_2 = pygame.font.SysFont('times new roman', 20)
     game_over_surface = my_font.render('GAME OVER', True, red)
-    game_over_surface_2 = my_font_2.render('c: continuar / q: quitar', True, white)
+    game_over_surface_2 = my_font_2.render('Presiona C para reiniciar o Q para salir', True, white)
     game_over_rect = game_over_surface.get_rect()
     game_over_rect_2 = game_over_surface_2.get_rect()
     game_over_rect.midtop = (frame_size_x/2, frame_size_y/4)
@@ -77,7 +64,6 @@ def game_over():
                     pygame.quit()
                     sys.exit()
                 if event.type == pygame.KEYDOWN and event.key == ord('c'):
-                    game_over_= False
                     game()
     
     
@@ -98,7 +84,7 @@ def show_score(choice, color, font, size):
 def game():
     global snake_pos, snake_body
     global food_pos, food_spawn
-    global direction, change_to, score, game_over_
+    global direction, change_to, score
     snake_pos = [100, 50]
     snake_body = [[100, 50], [100 - 10, 50], [100 - (2 * 10), 50]]
 
@@ -107,7 +93,8 @@ def game():
 
     direction = 'RIGHT'
     change_to = direction
-    game_over_=False
+    score = 0
+
 
     score = 0
     while True:
